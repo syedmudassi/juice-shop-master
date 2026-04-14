@@ -2,7 +2,9 @@ name: DevSecOps Pipeline
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "develop", "main" ]
+  pull_request:
+    branches: [ "develop" ]
 
 jobs:
   scan:
@@ -15,14 +17,18 @@ jobs:
     - name: Setup Node
       uses: actions/setup-node@v4
       with:
-        node-version: '18'
+        node-version: '20'
+        cache: 'npm'
 
     - name: Install Dependencies
       run: npm install
 
+    - name: Lint Code
+      run: npm run lint
+
     - name: Run App
       run: |
-        node server.js &
+        npm start &
         sleep 10
 
     # --- SNYK ---
