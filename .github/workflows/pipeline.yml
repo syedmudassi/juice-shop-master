@@ -19,23 +19,22 @@ jobs:
       with:
         node-version: '20'
 
-    - name: Install Dependencies & Build
-      run: |
-        # Note: In Juice Shop, npm install triggers the full frontend build 
-        # via the 'postinstall' script in package.json.
-        npm install
-
-    - name: Build Server
-      run: npm run build:server
+    - name: Install Dependencies (Scripts Ignored)
+      run: npm install --ignore-scripts
 
     - name: Lint Code
       run: npm run lint
 
-    - name: Run Unit & Integration Tests
-      run: npm test
-
     - name: Run Refactoring Safety Net
       run: npm run rsn
+
+    - name: Full Build
+      run: |
+        # Now run the scripts that build the frontend and server
+        npm run postinstall
+
+    - name: Run Unit & Integration Tests
+      run: npm test
 
     - name: Run App
       run: |
