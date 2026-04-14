@@ -1,0 +1,63 @@
+.scan-dashboard {
+  max-width: 980px;
+  margin: 1.5rem auto;
+  padding: 0 1rem 1rem;
+}
+
+header h1 {
+  margin: 0;
+}
+
+header p {
+  margin: 0.5rem 0 1.5rem;
+  color: rgba(0, 0, 0, 0.68);
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+}
+
+.metric {
+  padding: 1rem;
+}
+
+.metric h2 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.metric p {
+  margin: 0.8rem 0 0;
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.metric.high p {
+  color: #b00020;
+}
+
+.metric.medium p {
+  color: #ef6c00;
+}
+
+.metric.low p {
+  color: #2e7d32;
+}
+
+.state {
+  padding: 1rem;
+}
+
+.loading-state {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.error-state {
+  border-color: #d32f2f;
+  color: #b71c1c;
+}

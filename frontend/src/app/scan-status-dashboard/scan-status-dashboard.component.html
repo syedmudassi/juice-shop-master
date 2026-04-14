@@ -1,0 +1,44 @@
+<!--
+  ~ Copyright (c) 2014-2026 Bjoern Kimminich & the OWASP Juice Shop contributors.
+  ~ SPDX-License-Identifier: MIT
+-->
+
+<section class="scan-dashboard" aria-label="Vulnerability Scan Status Dashboard">
+  <header>
+    <h1>Scan Status Dashboard</h1>
+    <p>Live snapshot of vulnerability counts returned by the scan status API.</p>
+  </header>
+
+  @if (loading) {
+    <div class="state loading-state">
+      <mat-spinner diameter="36"></mat-spinner>
+      <p>Loading scan status...</p>
+    </div>
+  } @else if (error) {
+    <mat-card appearance="outlined" class="state error-state">
+      <p>{{ error }}</p>
+    </mat-card>
+  } @else if (scanStatus) {
+    <div class="cards">
+      <mat-card appearance="outlined" class="metric total">
+        <h2>Total</h2>
+        <p>{{ scanStatus.totalVulnerabilities }}</p>
+      </mat-card>
+
+      <mat-card appearance="outlined" class="metric high">
+        <h2>High</h2>
+        <p>{{ scanStatus.high }}</p>
+      </mat-card>
+
+      <mat-card appearance="outlined" class="metric medium">
+        <h2>Medium</h2>
+        <p>{{ scanStatus.medium }}</p>
+      </mat-card>
+
+      <mat-card appearance="outlined" class="metric low">
+        <h2>Low</h2>
+        <p>{{ scanStatus.low }}</p>
+      </mat-card>
+    </div>
+  }
+</section>

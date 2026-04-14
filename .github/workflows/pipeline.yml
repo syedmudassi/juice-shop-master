@@ -1,0 +1,48 @@
+name: DevSecOps Pipeline
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v4
+
+    - name: Setup Node
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+
+    - name: Install Dependencies
+      run: npm install
+
+    - name: Run App
+      run: |
+        node server.js &
+        sleep 10
+
+    # --- SNYK ---
+    - name: Install Snyk
+      run: npm install -g snyk
+
+    - name: Run Snyk Scan
+      run: snyk test
+      env:
+        SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+
+    # --- ZAP ---
+    - name: Run OWASP ZAP Scan
+      run: |
+        docker run --user root --network="host" -v $(pwd):/zap/wrk/:rw -t ghcr.io/zaproxy/zaproxy:stable zap-baseline.py \
+          -t http://localhost:3000 -r report.html -a
+      continue-on-error: true
+
+    - name: Upload ZAP HTML Report
+      uses: actions/upload-artifact@v4
+      with:
+        name: zap-html-report
+        path: report.html
