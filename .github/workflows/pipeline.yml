@@ -25,6 +25,12 @@ jobs:
     - name: Lint Code
       run: npm run lint
 
+    - name: Run Unit & Integration Tests
+      run: npm test
+
+    - name: Run Refactoring Safety Net
+      run: npm run rsn
+
     - name: Run App
       run: |
         npm start &

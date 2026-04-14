@@ -1,7 +1,7 @@
 .scan-dashboard {
   max-width: 980px;
-  margin: 1.5rem auto;
-  padding: 0 1rem 1rem;
+  margin: $space-l auto;
+  padding: 0 $space-m $space-m;
 }
 
 header h1 {
@@ -9,18 +9,18 @@ header h1 {
 }
 
 header p {
-  margin: 0.5rem 0 1.5rem;
+  margin: $space-xs 0 $space-l;
   color: rgba(0, 0, 0, 0.68);
 }
 
 .cards {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 1rem;
+  gap: $space-m;
 }
 
 .metric {
-  padding: 1rem;
+  padding: $space-m;
 }
 
 .metric h2 {
@@ -30,7 +30,7 @@ header p {
 }
 
 .metric p {
-  margin: 0.8rem 0 0;
+  margin: $space-s 0 0;
   font-size: 2rem;
   font-weight: 700;
 }
@@ -48,13 +48,13 @@ header p {
 }
 
 .state {
-  padding: 1rem;
+  padding: $space-m;
 }
 
 .loading-state {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: $space-s;
 }
 
 .error-state {
