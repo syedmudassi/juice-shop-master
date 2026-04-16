@@ -36,10 +36,18 @@ jobs:
     - name: Run Unit & Integration Tests
       run: npm test
 
-    - name: Run App
+    - name: Start App and wait for readiness
       run: |
-        npm start &
-        sleep 10
+        nohup npm start > app.log 2>&1 &
+        for i in {1..30}; do
+          if curl --silent --fail http://localhost:3000/ > /dev/null; then
+            echo "App is up"
+            break
+          fi
+          echo "Waiting for app to start... ($i/30)"
+          sleep 2
+        done
+        curl --silent --fail http://localhost:3000/ > /dev/null || (echo "App failed to start" && cat app.log && exit 1)
 
     # --- SNYK ---
     - name: Install Snyk
