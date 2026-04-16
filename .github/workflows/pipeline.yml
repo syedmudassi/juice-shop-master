@@ -22,6 +22,10 @@ jobs:
     - name: Install Dependencies (Scripts Ignored)
       run: npm install --ignore-scripts
 
+    - name: Install Frontend Dependencies
+      run: |
+        cd frontend && npm install
+
     - name: Lint Code
       run: npm run lint
 
