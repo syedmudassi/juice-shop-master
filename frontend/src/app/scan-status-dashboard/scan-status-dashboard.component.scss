@@ -1,3 +1,5 @@
+@use '../../styles/variables' as *;
+
 .scan-dashboard {
   max-width: 980px;
   margin: $space-l auto;
